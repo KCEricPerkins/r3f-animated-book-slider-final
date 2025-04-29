@@ -39,7 +39,7 @@ pages.push({
   front: pictures[pictures.length - 1],
   back: "book-back",
 });
-
+/*
 export const UI = () => {
   const [page, setPage] = useAtom(pageAtom);
 
@@ -47,7 +47,7 @@ export const UI = () => {
     const audio = new Audio("/audios/page-flip-01a.mp3");
     audio.play();
   }, [page]);
-
+*/
   return (
     <>
       <main className=" pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col">
