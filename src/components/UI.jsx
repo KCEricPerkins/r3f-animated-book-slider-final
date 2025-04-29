@@ -1,5 +1,5 @@
 import { atom, useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const pictures = [
   "DSC00680",
@@ -42,27 +42,49 @@ pages.push({
 
 export const UI = () => {
   const [page, setPage] = useAtom(pageAtom);
-/*
+  const audioRef = useRef(null);
+
   useEffect(() => {
-    const audio = new Audio("/audios/page-flip-01a.mp3");
-    audio.play();
-  }, [page]);
-*/
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.muted = true;
+    audio.loop = true;
+    audio.play().catch(() => {});
+
+    const handleFirstClick = () => {
+      audio.muted = false;
+      window.removeEventListener("click", handleFirstClick);
+    };
+    window.addEventListener("click", handleFirstClick);
+
+    return () => {
+      window.removeEventListener("click", handleFirstClick);
+      audio.pause();
+    };
+  }, []);
+
   return (
     <>
-      <main className=" pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col">
+      <main className="pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col">
+        <audio
+          ref={audioRef}
+          src="/audios/timeofyourlife.mp3"
+          style={{ display: "none" }}
+        />
+
         <a
           className="pointer-events-auto mt-10 ml-10"
-          href="https://lessons.wawasensei.dev/courses/react-three-fiber"
+          href="https://espn.com"
         >
           <img className="w-20" src="/images/wawasensei-white.png" />
         </a>
+
         <div className="w-full overflow-auto pointer-events-auto flex justify-center">
           <div className="overflow-auto flex items-center gap-4 max-w-full p-10">
             {[...pages].map((_, index) => (
               <button
                 key={index}
-                className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
+                className={`border-transparent hover:border-white transition-all duration-300 px-4 py-3 rounded-full text-lg uppercase shrink-0 border ${
                   index === page
                     ? "bg-white/90 text-black"
                     : "bg-black/30 text-white"
@@ -73,7 +95,7 @@ export const UI = () => {
               </button>
             ))}
             <button
-              className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
+              className={`border-transparent hover:border-white transition-all duration-300 px-4 py-3 rounded-full text-lg uppercase shrink-0 border ${
                 page === pages.length
                   ? "bg-white/90 text-black"
                   : "bg-black/30 text-white"
@@ -84,19 +106,12 @@ export const UI = () => {
             </button>
           </div>
         </div>
-
-        <audio
-          src="/audios/timeofyourlife.mp3"
-          autoPlay
-          loop
-          style={{ display: "none" }}
-        />
       </main>
 
       <div className="fixed inset-0 flex items-center -rotate-2 select-none">
         <div className="relative">
-          <div className="bg-white/0  animate-horizontal-scroll flex items-center gap-8 w-max px-8">
-            <h1 className="shrink-0 text-white text-10xl font-black ">
+          <div className="bg-white/0 animate-horizontal-scroll flex items-center gap-8 w-max px-8">
+            <h1 className="shrink-0 text-white text-10xl font-black">
               Owen Perkins
             </h1>
             <h2 className="shrink-0 text-white text-8xl italic font-light">
@@ -122,7 +137,7 @@ export const UI = () => {
             </h2>
           </div>
           <div className="absolute top-0 left-0 bg-white/0 animate-horizontal-scroll-2 flex items-center gap-8 px-8 w-max">
-            <h1 className="shrink-0 text-white text-10xl font-black ">
+            <h1 className="shrink-0 text-white text-10xl font-black">
               Blue Valley North
             </h1>
             <h2 className="shrink-0 text-white text-8xl italic font-light">
