@@ -2,22 +2,29 @@ import { atom, useAtom } from "jotai";
 import { useEffect, useRef } from "react";
 
 const pictures = [
+  "baby-1",
+  "baby-2",
+  "oneish",
+  "twoish-1",
+  "tw0ish",
+  "twoish-3",
+  "three-ish",
+  "threeish-1",
+  "threeish-2",
+  "threeish-3",
+  "fourish-1",
+  "fiveish-",
+  "fiveish-1",
+  "fiveish-2",
+  "fiveish-8",
+  "sixish-1",
+  "sixish-2",
+  "sixish-3",
+  "sixish-5",
+  "tenish-2",
+  "tenish-1",
   "DSC00680",
-  "DSC00933",
-  "DSC00966",
-  "DSC00983",
-  "DSC01011",
-  "DSC01040",
-  "DSC01064",
-  "DSC01071",
-  "DSC01103",
-  "DSC01145",
-  "DSC01420",
-  "DSC01461",
-  "DSC01489",
-  "DSC02031",
-  "DSC02064",
-  "DSC02069",
+  "HighSchool-1",
   "test",
 ];
 
@@ -72,12 +79,19 @@ export const UI = () => {
           style={{ display: "none" }}
         />
 
-        <a
-          className="pointer-events-auto mt-10 ml-10"
-          href="https://espn.com"
-        >
-          <img className="w-20" src="/images/wawasensei-white.png" />
-        </a>
+<a
+  className="pointer-events-auto absolute top-4 left-4"
+  href="venmo://users/Owen-Perkins-6"
+  onClick={(e) => {
+    if (!navigator.userAgent.includes("Mobile")) {
+      e.preventDefault();
+      window.open("https://venmo.com/Owen-Perkins-6", "_blank");
+    }
+  }}
+>
+  <img className="w-60 h-auto" src="/images/OwenVenmo.png" />
+</a>
+
 
         <div className="w-full overflow-auto pointer-events-auto flex justify-center">
           <div className="overflow-auto flex items-center gap-4 max-w-full p-10">
