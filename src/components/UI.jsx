@@ -80,7 +80,7 @@ export const UI = () => {
         />
 
 <a
-  className="pointer-events-auto absolute top-4 left-4"
+  className="pointer-events-auto absolute top-24 left-4 sm:top-4 group"
   href="venmo://users/Owen-Perkins-6"
   onClick={(e) => {
     if (!navigator.userAgent.includes("Mobile")) {
@@ -89,8 +89,14 @@ export const UI = () => {
     }
   }}
 >
-  <img className="w-60 h-auto" src="/images/OwenVenmo.png" />
+  <img className="w-40 sm:w-60 h-auto" src="/images/OwenVenmo.png" />
+
+  {/* Tooltip */}
+  <span className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+    Donate to Owen’s College Fund
+  </span>
 </a>
+
 
 
         <div className="w-full overflow-auto pointer-events-auto flex justify-center">
